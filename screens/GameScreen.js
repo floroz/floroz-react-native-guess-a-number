@@ -34,7 +34,6 @@ const GameScreen = ({ userChoice, quitGameHandler, onGameOver }) => {
       (direction === "lower" && currentGuess < userChoice) ||
       (direction === "higher" && currentGuess > userChoice)
     ) {
-      console.log("NONONO ***");
       Alert.alert("Don't lie!", "You know that this is wrong...", [
         { text: "Retry", style: "cancel" },
       ]);

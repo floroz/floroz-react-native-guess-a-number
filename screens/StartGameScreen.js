@@ -12,6 +12,8 @@ import Card from "../components/Card";
 import Input from "../components/Input";
 import NumberContainer from "../components/NumberContainer";
 import Colors from "../constants/colors";
+import Fonts from "../constants/fonts";
+import defaultStyles from "../constants/default-styles";
 
 const StartGameScreen = ({ startGameHandler }) => {
   const [guess, setGuess] = React.useState("");
@@ -61,7 +63,7 @@ const StartGameScreen = ({ startGameHandler }) => {
       <View style={styles.screen}>
         <Text style={styles.title}>Start a New Game</Text>
         <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
+          <Text style={styles.selectNum}>Select a Number</Text>
           <Input
             value={guess}
             onChangeText={guessInputHandler}
@@ -104,6 +106,7 @@ const styles = StyleSheet.create({
   title: {
     fontSize: 20,
     marginVertical: 10,
+    fontFamily: Fonts.openSansBold,
   },
   inputContainer: {
     width: 300,
@@ -127,6 +130,9 @@ const styles = StyleSheet.create({
   summaryContainer: {
     marginTop: 20,
     alignItems: "center",
+  },
+  selectNum: {
+    ...defaultStyles.bodyText,
   },
 });
 
