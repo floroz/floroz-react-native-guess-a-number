@@ -1,18 +1,36 @@
 import React from "react";
 import { View, StyleSheet, Text, TextInput, Button } from "react-native";
+import Card from "../components/Card";
+import Input from "../components/Input";
+import Colors from "../constants/colors";
 
 const StartGameScreen = () => {
+  const [guess, setGuess] = React.useState("");
+
   return (
     <View style={styles.screen}>
       <Text style={styles.title}>Start a New Game</Text>
-      <View style={styles.inputContainer}>
+      <Card style={styles.inputContainer}>
         <Text>Select a Number</Text>
-        <TextInput />
+        <Input
+          value={guess}
+          onChangeText={setGuess}
+          style={styles.input}
+          blurOnSubmit
+          autoCapitalize="none"
+          autoCorrect={false}
+          keyboardType="number-pad"
+          maxLength={2}
+        />
         <View style={styles.buttonContainer}>
-          <Button title="Reset" onPress={() => {}} color="red" />
-          <Button title="Confirm" onPress={() => {}} />
+          <View style={styles.button}>
+            <Button title="Reset" onPress={() => {}} color={Colors.accent} />
+          </View>
+          <View style={styles.button}>
+            <Button title="Confirm" onPress={() => {}} color={Colors.primary} />
+          </View>
         </View>
-      </View>
+      </Card>
     </View>
   );
 };
@@ -32,22 +50,19 @@ const styles = StyleSheet.create({
     maxWidth: "80%",
     padding: 20,
     alignItems: "center",
-    shadowColor: "black",
-    shadowOffset: {
-      height: 2,
-      width: 0,
-    },
-    shadowRadius: 5,
-    shadowOpacity: 0.26,
-    elevation: 8,
-    backgroundColor: "white",
-    borderRadius: 20,
   },
   buttonContainer: {
     flexDirection: "row",
     width: "100%",
     justifyContent: "space-between",
     paddingHorizontal: 15,
+  },
+  button: {
+    width: 105,
+    padding: 10,
+  },
+  input: {
+    width: 50,
   },
 });
 
