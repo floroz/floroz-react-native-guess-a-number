@@ -15,12 +15,19 @@ const generateRandomBetween = (min, max, exclude) => {
   return rndNum;
 };
 
-const GameScreen = ({ userChoice, quitGameHandler }) => {
+const GameScreen = ({ userChoice, quitGameHandler, onGameOver }) => {
   const [currentGuess, setCurrentGuess] = React.useState(
     generateRandomBetween(1, 100, userChoice)
   );
   const currentLow = React.useRef(1);
   const currentHigh = React.useRef(100);
+  const attempts = React.useRef(0);
+
+  React.useEffect(() => {
+    if (userChoice === currentGuess) {
+      onGameOver(attempts.current);
+    }
+  }, [currentGuess, userChoice, onGameOver]);
 
   const onGuessHandler = (direction) => {
     if (
@@ -45,6 +52,7 @@ const GameScreen = ({ userChoice, quitGameHandler }) => {
       currentHigh.current,
       currentGuess
     );
+    attempts.current++;
     setCurrentGuess(nextNum);
   };
 
