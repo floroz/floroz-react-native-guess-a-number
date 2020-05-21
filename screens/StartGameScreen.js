@@ -63,7 +63,7 @@ const StartGameScreen = ({ startGameHandler }) => {
       <View style={styles.screen}>
         <Text style={styles.title}>Start a New Game</Text>
         <Card style={styles.inputContainer}>
-          <Text style={styles.selectNum}>Select a Number</Text>
+          <Text>Select a Number</Text>
           <Input
             value={guess}
             onChangeText={guessInputHandler}
@@ -109,6 +109,7 @@ const styles = StyleSheet.create({
     fontFamily: Fonts.openSansBold,
   },
   inputContainer: {
+    ...defaultStyles.bodyText,
     width: 300,
     maxWidth: "80%",
     padding: 20,
@@ -131,9 +132,7 @@ const styles = StyleSheet.create({
     marginTop: 20,
     alignItems: "center",
   },
-  selectNum: {
-    ...defaultStyles.bodyText,
-  },
+  selectNum: {},
 });
 
 export default StartGameScreen;
