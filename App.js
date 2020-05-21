@@ -48,27 +48,24 @@ export default function App() {
   };
 
   let content = <StartGameScreen startGameHandler={startGameHandler} />;
-  return (content = (
-    <GameOverScreen attempts={1} onPlayAgain={onPlayAgain} userNumber={2} />
-  ));
 
-  // if (userNum && attempts <= 0) {
-  //   content = (
-  //     <GameScreen
-  //       userChoice={userNum}
-  //       quitGameHandler={quitGameHandler}
-  //       onGameOver={gameOverHandler}
-  //     />
-  //   );
-  // } else if (attempts > 0) {
-  //   content = (
-  //     <GameOverScreen
-  //       attempts={attempts}
-  //       onPlayAgain={onPlayAgain}
-  //       userNumber={userNum}
-  //     />
-  //   );
-  // }
+  if (userNum && attempts <= 0) {
+    content = (
+      <GameScreen
+        userChoice={userNum}
+        quitGameHandler={quitGameHandler}
+        onGameOver={gameOverHandler}
+      />
+    );
+  } else if (attempts > 0) {
+    content = (
+      <GameOverScreen
+        attempts={attempts}
+        onPlayAgain={onPlayAgain}
+        userNumber={userNum}
+      />
+    );
+  }
 
   return (
     <View style={styles.screen}>
