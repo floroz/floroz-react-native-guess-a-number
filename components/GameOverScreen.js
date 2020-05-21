@@ -1,6 +1,7 @@
 import React from "react";
 import { StyleSheet, Text, Button, Image, View } from "react-native";
 import Card from "./Card";
+import MainButton from "./MainButton";
 import fonts from "../constants/fonts";
 
 const GameOverScreen = (props) => {
@@ -13,15 +14,17 @@ const GameOverScreen = (props) => {
           style={styles.image}
         />
       </View>
-      <Text style={styles.bodyText}>
-        The user number was{" "}
-        <Text style={styles.highlight}>{props.userNumber}</Text>
-      </Text>
-      <Text style={styles.bodyText}>
-        Computer has guessed in{" "}
-        <Text style={styles.highlight}>{props.attempts} attemps</Text>
-      </Text>
-      <Button title="Play again" onPress={props.onPlayAgain} />
+      <View style={styles.textContainer}>
+        <Text style={styles.bodyText}>
+          The user number was{" "}
+          <Text style={styles.highlight}>{props.userNumber}</Text>
+        </Text>
+        <Text style={styles.bodyText}>
+          Computer has guessed in{" "}
+          <Text style={styles.highlight}>{props.attempts} attemps</Text>
+        </Text>
+      </View>
+      <MainButton onPress={props.onPlayAgain}>Play again</MainButton>
     </Card>
   );
 };
@@ -35,11 +38,11 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-    borderRadius: 150,
+    borderRadius: 100,
     borderWidth: 3,
     borderColor: "black",
-    width: 300,
-    height: 300,
+    width: 200,
+    height: 200,
     overflow: "hidden",
     marginVertical: 30,
   },
@@ -50,9 +53,14 @@ const styles = StyleSheet.create({
   highlight: {
     color: "green",
     fontFamily: fonts.openSansBold,
+    fontSize: 20,
   },
   bodyText: {
     fontFamily: fonts.openSans,
     fontSize: 18,
+    textAlign: "center",
+  },
+  textContainer: {
+    marginVertical: 10,
   },
 });
