@@ -8,6 +8,8 @@ import {
   Keyboard,
   Alert,
   Dimensions,
+  ScrollView,
+  KeyboardAvoidingView,
 } from "react-native";
 import Card from "../components/Card";
 import Input from "../components/Input";
@@ -21,6 +23,20 @@ const StartGameScreen = ({ startGameHandler }) => {
   const [guess, setGuess] = React.useState("");
   const [confirmed, setConfirmed] = React.useState(false);
   const [selectedNumber, setSelectedNumber] = React.useState();
+  const [buttonWidth, setButtonWidth] = React.useState(
+    Dimensions.get("window").width / 4
+  );
+
+  React.useEffect(() => {
+    const updateLayout = () => {
+      setButtonWidth(Dimensions.get("window").width / 4);
+    };
+    Dimensions.addEventListener("change", updateLayout);
+
+    return () => {
+      Dimensions.removeEventListener("change", updateLayout);
+    };
+  });
 
   const guessInputHandler = (guessEntered) => {
     setGuess(guessEntered.replace(/[^0-9]/g, ""));
@@ -60,41 +76,45 @@ const StartGameScreen = ({ startGameHandler }) => {
   }
 
   return (
-    <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
-      <View style={styles.screen}>
-        <Text style={styles.title}>Start a New Game</Text>
-        <Card style={styles.inputContainer}>
-          <Text>Select a Number</Text>
-          <Input
-            value={guess}
-            onChangeText={guessInputHandler}
-            style={styles.input}
-            blurOnSubmit
-            autoCapitalize="none"
-            autoCorrect={false}
-            keyboardType="number-pad"
-            maxLength={2}
-          />
-          <View style={styles.buttonContainer}>
-            <View style={styles.button}>
-              <Button
-                title="Reset"
-                onPress={resetInputHandler}
-                color={Colors.accent}
+    <ScrollView>
+      <KeyboardAvoidingView behavior="position" keyboardVerticalOffset={30}>
+        <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
+          <View style={styles.screen}>
+            <Text style={styles.title}>Start a New Game</Text>
+            <Card style={styles.inputContainer}>
+              <Text>Select a Number</Text>
+              <Input
+                value={guess}
+                onChangeText={guessInputHandler}
+                style={styles.input}
+                blurOnSubmit
+                autoCapitalize="none"
+                autoCorrect={false}
+                keyboardType="number-pad"
+                maxLength={2}
               />
-            </View>
-            <View style={styles.button}>
-              <Button
-                title="Confirm"
-                onPress={confirmInputHandler}
-                color={Colors.primary}
-              />
-            </View>
+              <View style={styles.buttonContainer}>
+                <View style={{ width: buttonWidth }}>
+                  <Button
+                    title="Reset"
+                    onPress={resetInputHandler}
+                    color={Colors.accent}
+                  />
+                </View>
+                <View style={{ width: buttonWidth }}>
+                  <Button
+                    title="Confirm"
+                    onPress={confirmInputHandler}
+                    color={Colors.primary}
+                  />
+                </View>
+              </View>
+            </Card>
+            {confirmedOuput}
           </View>
-        </Card>
-        {confirmedOuput}
-      </View>
-    </TouchableWithoutFeedback>
+        </TouchableWithoutFeedback>
+      </KeyboardAvoidingView>
+    </ScrollView>
   );
 };
 
@@ -121,10 +141,6 @@ const styles = StyleSheet.create({
     width: "100%",
     justifyContent: "space-between",
     paddingHorizontal: 15,
-  },
-  button: {
-    // width: 105,
-    width: Dimensions.get("window").width / 4,
   },
   input: {
     width: 50,
