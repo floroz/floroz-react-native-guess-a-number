@@ -1,5 +1,5 @@
 import React from "react";
-import { StyleSheet, Text, Button, Image, View } from "react-native";
+import { StyleSheet, Text, Image, View, Dimensions } from "react-native";
 import Card from "./Card";
 import MainButton from "./MainButton";
 import fonts from "../constants/fonts";
@@ -38,13 +38,13 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   imageContainer: {
-    borderRadius: 100,
+    borderRadius: (Dimensions.get("window").width * 0.7) / 2,
     borderWidth: 3,
     borderColor: "black",
-    width: 200,
-    height: 200,
+    width: Dimensions.get("window").width * 0.7,
+    height: Dimensions.get("window").width * 0.7,
     overflow: "hidden",
-    marginVertical: 30,
+    marginVertical: Dimensions.get("window").height / 30,
   },
   image: {
     width: "100%",
@@ -53,7 +53,7 @@ const styles = StyleSheet.create({
   highlight: {
     color: "green",
     fontFamily: fonts.openSansBold,
-    fontSize: 20,
+    fontSize: Dimensions.get("window").height < 400 ? 16 : 20,
   },
   bodyText: {
     fontFamily: fonts.openSans,
@@ -61,6 +61,6 @@ const styles = StyleSheet.create({
     textAlign: "center",
   },
   textContainer: {
-    marginVertical: 10,
+    marginVertical: Dimensions.get("window").height / 60,
   },
 });
